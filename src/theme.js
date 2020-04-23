@@ -12,7 +12,9 @@ function ThemeNav () {
         winPosition: 0,
         winHeight: null,
         docHeight: null,
-        isRunning: false
+        isRunning: false,
+        isScrolling: false,
+        sidebarOffset: 59
     };
 
     nav.enable = function (withStickyNav) {
@@ -50,6 +52,17 @@ function ThemeNav () {
                 });
             }
 
+            // Sticky scroll
+            self.win.on('scroll', function () {
+                if (!self.isScrolling) {
+                    self.isScrolling = true;
+                    requestAnimationFrame(function() {
+                        self.sidebarRefresh();
+                        self.isScrolling = false;
+                    });
+                }
+            });
+
             // Set resize monitor
             self.win.on('resize', function () {
                 if (!self.winResize) {
@@ -63,6 +76,16 @@ function ThemeNav () {
 
     };
 
+    // Refresh position of sidebar (for sticky positioning)
+    nav.sidebarRefresh = function() {
+        var top = this.win.scrollTop() - this.sidebarOffset;
+        if (top <= 0) {
+            this.sideBar.css('top', Math.abs(top));
+        } else {
+            this.sideBar.css('top', 0);
+        }
+    }
+
     // TODO remove this with a split in theme and Read the Docs JS logic as
     // well, it's only here to support 0.3.0 installs of our theme.
     nav.enableSticky = function() {
@@ -74,6 +97,7 @@ function ThemeNav () {
             self = this;
 
         this.navBar = $('div.wy-side-scroll:first');
+        this.sideBar = $("div.wy-nav-side-inner");
         this.win = $(window);
 
         // Set up javascript UX bits
@@ -111,7 +135,7 @@ function ThemeNav () {
 
         // Add expand links to all parents of nested ul
         $('.wy-menu-vertical ul').not('.simple').siblings('a').each(function () {
-            var link = $(this);
+            var link = $(this),
                 expand = $('<span class="toctree-expand"></span>');
             expand.on('click', function (ev) {
                 self.toggleCurrent(link);
@@ -153,7 +177,7 @@ function ThemeNav () {
                 link.closest('li.toctree-l3').addClass('current');
                 link.closest('li.toctree-l4').addClass('current');
                 link.closest('li.toctree-l5').addClass('current');
-                link[0].scrollIntoView();
+                $('.wy-nav-side .wy-side-scroll').scrollTop(link[0].offsetTop);
             }
         }
         catch (err) {
@@ -179,6 +203,7 @@ function ThemeNav () {
         this.winResize = false;
         this.winHeight = this.win.height();
         this.docHeight = $(document).height();
+        this.sidebarRefresh();
     };
 
     nav.hashChange = function () {

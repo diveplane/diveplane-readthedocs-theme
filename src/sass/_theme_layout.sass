@@ -134,7 +134,10 @@ html
 
           li.toctree-l#{$toc_level + 1}  > a
             @extend %display_current_toctree_element
-            padding: $gutter / 4 $gutter * ($toc_level + .5)
+            padding-top: $gutter / 4
+            padding-bottom: $gutter / 4
+            padding-left: $gutter * ($toc_level + .5)
+            padding-right: $gutter
         a:hover span.toctree-expand
           @extend %toctree_hover_link_color
     @if $toc_level > 2 and $toc_level < 5
@@ -175,12 +178,12 @@ html
     font-size: 90%
     color: $menu-link-light
     &:hover
-      background-color: lighten($menu-background-color, 10%)
+      background-color: darken($menu-background-color, 10%)
       cursor: pointer
       span.toctree-expand
         color: $menu-link-light
     &:active
-      background-color: $menu-logo-color
+      background-color: $gray
       cursor: pointer
       color: $menu-link-active
       span.toctree-expand
@@ -189,8 +192,7 @@ html
 .wy-side-nav-search
   display: block
   width: $nav-desktop-width
-  padding: $gutter / 2
-  margin-bottom: $gutter / 2
+  padding: $gutter $gutter / 2
   z-index: $z-index-popover
   background-color: $nav-search-background-color
   text-align: center
@@ -233,7 +235,7 @@ html
     margin-top: -1 * ($gutter / 4)
     margin-bottom: $gutter / 2
     font-weight: normal
-    color: rgba(255,255,255,.3)
+    color: $gray
 
 .wy-nav .wy-menu-vertical
   header
@@ -272,62 +274,91 @@ html
   height: 100%
 
 .wy-nav-side
-  position: fixed
+  position: relative
   top: 0
   bottom: 0
-  left: 0
-  padding-bottom: 2em
   width: $nav-desktop-width
   overflow-x: hidden
   overflow-y: hidden
-  min-height: 100%
   color: $menu-medium
   background: $nav-background-color
   z-index: $z-index-popover
+  border-right: solid 1px darken($menu-vertical-background-color, 20%)
+  .wy-nav-side-inner
+    position: fixed
+    padding-bottom: 2em
+    width: $nav-desktop-width
+    top: $nav-top-height
+    bottom: 0
+    overflow-x: hidden
 
 .wy-side-scroll
   width: $nav-desktop-width + 20px
   position: relative
   overflow-x: hidden
-  overflow-y: scroll
+  overflow-y: auto
   height: 100%
 
 .wy-nav-top
-  display: none
-  background: $link-color
+  background: $nav-top-background-color
   color: $white
-  padding: $gutter / 4 $gutter / 2
+  height: $nav-top-height
+  padding: .5rem 1rem
   position: relative
-  line-height: 50px
-  text-align: center
+  width: 100%
   font-size: 100%
+  z-index: $z-index-tray + 1
   +clearfix
+  .wy-nav-top-inner
+    display: flex
+    width: 100%
+    max-width: $content-width
+    margin: 0 auto
+    padding: 0 15px
   a
     color: $white
     font-weight: bold
     +font-smooth
+    &.brand
+      display: inline-block
+      padding: .3125rem 0
   img
-    margin-right: $base-line-height / 2
-    height: 45px
-    width: 45px
+    max-height: 33px
+    width: auto
     background-color: $menu-logo-color
-    padding: 5px
-    border-radius: 100%
-  i
-    font-size: 30px
-    float: left
+  .nav-menu-button
+    display: none
+    background: transparent
+    border: 1px solid hsla(0,0%,100%,.1)
+    border-radius: 3px
+    color: hsla(0,0%,100%,.5)
+    padding: .25rem .75rem
+    width: auto
+    font-size: 1.25rem
+    vertical-align: middle
     cursor: pointer
-    padding-top: inherit
+    &-icon
+      display: inline-block
+      width: 1.5em
+      height: 1.5em
+      vertical-align: middle
+      content: ""
+      background: no-repeat 50%
+      background-size: 100% 100%
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Cpath stroke='rgba(255,255,255,0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E")
 
 .wy-nav-content-wrap
-  margin-left: $nav-desktop-width
+  display: flex
+  flex-direction: row
+  justify-content: center
   background: $section-background-color
-  min-height: 100%
 
 .wy-nav-content
   padding: $gutter $gutter * 2
   height: 100%
-  max-width: $nav-content-width
+  min-height: calc(100vh - #{$nav-top-height})
+  max-width: $content-width - $nav-desktop-width
+  width: calc(100% - #{$nav-desktop-width})
   margin: auto
 
 .wy-body-mask
@@ -379,36 +410,57 @@ footer
 .genindextable li > ul
   margin-left: $base-line-height
 
-+media($tablet)
++media($tablet-wider)
   .wy-body-for-nav
     background: $section-background-color
   .wy-nav-top
-    display: block
+    a.brand
+      padding: .3125rem 15px
+    .nav-menu-button
+      display: inline-block
+    .wy-nav-top-inner
+      padding: 0
   .wy-nav-side
-    @if $nav-desktop-position == left
-      left: -$nav-desktop-width
-    @else
-      right: -$nav-desktop-width
+    position: fixed
+    top: $nav-top-height
+    left: -40%
+    width: 40%
+    .wy-nav-side-inner
+      position: relative
+      top: 0 !important
+      height: calc(100vh - #{$nav-top-height}) !important
+      width: 100%
     &.shift
-      width: 85%
       left: 0
   .wy-side-scroll
-    width: auto
+    width: 100%
+    max-height: initial
   .wy-side-nav-search
     width: auto
   .wy-menu.wy-menu-vertical
     width: auto
   .wy-nav-content-wrap
     margin-left: 0
+    min-width: 100%
     .wy-nav-content
+      width: 100%
       padding: $gutter
     &.shift
       position: fixed
-      min-width: 100%
-      left: 85%
+      margin-top: $nav-top-height
+      margin-left: 40%
+      left: 0
       top: 0
       height: 100%
       overflow: hidden
+
++media($tablet)
+  .wy-nav-side
+    left: -85%
+    width: 85%
+  .wy-nav-content-wrap
+    &.shift
+      margin-left: 85%
 
 @media screen and (min-width: $nav-media-query)
   .wy-nav-content-wrap

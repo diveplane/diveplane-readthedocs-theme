@@ -2,11 +2,25 @@
 // that are set in wyrm_core/wy_variables.sass. You'll find wyrm in bower_components if you're looking
 // for a reference.
 
+$color-primary:                       #015e9c
+$color-secondary:                     #05305b
+$color-dark:                          #030d1b
+$color-light:                         #f8f9fa
+$color-sonar:                         #f9e66b
+$color-geminai:                       #ee6b24
+$color-alluvion:                      #a9cf38
+$color-general:                       #44baeb
+
+$gray:                                #666
+
 $fa-font-path:                        "~font-awesome/fonts"
 $static-img:                          "../img/"
 
-$nav-content-width:                   800px
-$nav-media-query:                     (($nav-desktop-width) + ($nav-content-width))
+$content-width:                       1140px
+$nav-top-height:                      59px
+$nav-desktop-width:                   300px
+$nav-media-query:                     1200px
+$tablet-wider:                        new-breakpoint(max-width 992px 8)
 
 $mathjax-color:                       $text-color
 
@@ -27,6 +41,8 @@ $guilabel-color:                      $blue
 $footer-color:                        $text-medium
 
 // Menu colors
+$menu-logo-color:                     transparent
+$menu-background-color:               #e9e9e9
 $menu-vertical-background-color:      $section-background-color
 
 // Menu text colors
@@ -38,20 +54,21 @@ $menu-lighter:                        lighten($menu-color,60%) !default
 
 // Menu link colors
 $menu-link-color:                     $text-color
-$menu-link-dark:                      $text-dark
-$menu-link-medium:                    $text-medium
-$menu-link-light:                     $text-lighter
+$menu-link-dark:                      $text-color
+$menu-link-medium:                    $text-dark
+$menu-link-light:                     $text-medium
 $menu-link-active:                    $white
 
 // Navigation colors
 $nav-background-color:                $menu-background-color
-$nav-search-background-color:         $blue
+$nav-top-background-color:            $color-secondary
+$nav-search-background-color:         transparent
 $nav-search-color:                    $section-background-color
 $nav-link-color:                      $blue
 $nav-link-color-visited:              $purple
 $nav-link-color-hover:                lighten($nav-link-color, 6%) !default
 $nav-link-color-alt:                  hsl(33, 100%, 51%)
-$nav-caption:                         lighten($blue, 15%)
+$nav-caption:                         $color-primary
 
 // Sidebar colors
 $sidebar-background-color:            $table-stripe-color
