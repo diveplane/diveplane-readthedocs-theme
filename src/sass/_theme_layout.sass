@@ -420,11 +420,17 @@ footer
       display: inline-block
     .wy-nav-top-inner
       padding: 0
+    &.shift
+      position: fixed
+      top: 0
+      left: 0
   .wy-nav-side
     position: fixed
     top: $nav-top-height
+    bottom: 0
     left: -40%
     width: 40%
+    height: calc(100% - #{$nav-top-height})
     .wy-nav-side-inner
       position: relative
       top: 0 !important

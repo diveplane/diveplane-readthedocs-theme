@@ -1,0 +1,6 @@
+// Add text and background classes for each theme color
+@each $key, $color in $theme-colors
+  .text-#{$key}
+    color: $color
+  .bg-#{$key}
+    background-color: $color
