@@ -354,6 +354,7 @@ html
   background: $section-background-color
 
 .wy-nav-content
+  position: relative
   padding: $gutter $gutter * 2
   height: 100%
   min-height: calc(100vh - #{$nav-top-height})
@@ -431,6 +432,7 @@ footer
     left: -40%
     width: 40%
     height: calc(100% - #{$nav-top-height})
+    transition: left ease 300ms, width ease 300ms
     .wy-nav-side-inner
       position: relative
       top: 0 !important
@@ -449,24 +451,32 @@ footer
     margin-left: 0
     min-width: 100%
     .wy-nav-content
+      left: 0
       width: 100%
+      max-width: 100%
       padding: $gutter
+      margin: 0
+      transition: left ease 300ms
     &.shift
       position: fixed
       margin-top: $nav-top-height
-      margin-left: 40%
-      left: 0
       top: 0
+      left: 0
+      right: 0
+      width: 100%
       height: 100%
       overflow: hidden
+      justify-content: flex-start
+      .wy-nav-content
+        left: 40%
 
 +media($tablet)
   .wy-nav-side
     left: -85%
     width: 85%
   .wy-nav-content-wrap
-    &.shift
-      margin-left: 85%
+    &.shift .wy-nav-content
+      left: 85%
 
 @media screen and (min-width: $nav-media-query)
   .wy-nav-content-wrap

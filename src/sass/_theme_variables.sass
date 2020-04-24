@@ -10,16 +10,16 @@ $color-sonar:                         #f9e66b
 $color-geminai:                       #ee6b24
 $color-alluvion:                      #a9cf38
 $color-general:                       #44baeb
-
-$theme-colors: ("primary": $color-primary, "secondary": $color-secondary, "dark": $color-dark, "light": $color-light)
-$theme-colors: map_merge($theme-colors, ("orange": $color-geminai, "yellow": $color-sonar, "green": $color-alluvion, "blue": $color-general))
+$color-general:                       #44baeb
 
 $color-success:                       $color-alluvion
 $color-warning:                       $color-sonar
 $color-danger:                        #be0032
 
 $gray:                                #666
-$text-darker:                         #303030
+
+$theme-colors: ("primary": $color-primary, "secondary": $color-secondary, "dark": $color-dark, "light": $color-light)
+$theme-colors: map_merge($theme-colors, ("orange": $color-geminai, "yellow": $color-sonar, "green": $color-alluvion, "blue": $color-general, "gray": $gray))
 
 $fa-font-path:                        "~font-awesome/fonts"
 $static-img:                          "../img/"
@@ -30,8 +30,8 @@ $nav-desktop-width:                   300px
 $nav-media-query:                     1200px
 $tablet-wider:                        new-breakpoint(max-width 992px 8)
 
+$text-darker:                         #303030
 $mathjax-color:                       $text-color
-
 $headerlink-color:                    $text-color
 
 // Code colors
