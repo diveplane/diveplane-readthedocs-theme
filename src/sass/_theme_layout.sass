@@ -426,19 +426,19 @@ footer
       top: 0
       left: 0
   .wy-nav-side
-    position: fixed
-    top: $nav-top-height
+    position: absolute
+    top: 0
     bottom: 0
     left: -40%
     width: 40%
     height: calc(100% - #{$nav-top-height})
     .wy-nav-side-inner
-      position: relative
-      top: 0 !important
-      height: calc(100vh - #{$nav-top-height}) !important
-      width: 100%
+      left: -40%
+      width: 40%
     &.shift
       left: 0
+      .wy-nav-side-inner
+        left: 0
   .wy-side-scroll
     width: 100%
     max-height: initial
@@ -472,6 +472,9 @@ footer
   .wy-nav-side
     left: -85%
     width: 85%
+    .wy-nav-side-inner
+      left: -85%
+      width: 85%
   .wy-nav-content-wrap
     &.shift .wy-nav-content
       left: 85%
