@@ -304,8 +304,14 @@
 
   dl:not(.docutils).class
     dl.field-list
+      & > dt
+        border-left-width: 6px
       dt
         word-break: break-word
+    dl.method
+      & > dt
+        border-left-color: lighten($blue, 20%)
+        background: lighten($blue, 50%)
 
   // These are the "literals" that get spit out when you mark stuff as ``code`` as your write.
   tt, code
