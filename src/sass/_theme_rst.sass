@@ -255,6 +255,9 @@
       vertical-align: top
     code
       color: $gray
+  .wy-table th
+    p:last-child
+      margin-bottom: 0
   // Remove the large vertical space between citations and footnotes
   .wy-table-responsive.citation, .wy-table-responsive.footnote
     margin-bottom: 0
@@ -271,6 +274,8 @@
     @extend .wy-table-bordered-all
     th
       border-color: $table-border-color
+      p:last-child
+        margin-bottom: 0
     &:not(.field-list)
       @extend .wy-table-striped
     // Remove bottom margin for the last element (and it's last child)
@@ -280,6 +285,9 @@
   table.field-list
     @extend .wy-table
     border: none
+    th
+      p:last-child
+        margin-bottom: 0
     td
       border: none
       p
@@ -293,6 +301,11 @@
       white-space: nowrap
     .field-body
       text-align: left
+
+  dl:not(.docutils).class
+    dl.field-list
+      dt
+        word-break: break-word
 
   // These are the "literals" that get spit out when you mark stuff as ``code`` as your write.
   tt, code
