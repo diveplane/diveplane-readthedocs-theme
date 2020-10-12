@@ -280,13 +280,14 @@
         content: " : "
     dl.footnote,
     dl.field-list
-      display: grid
-      grid-template-columns: max-content auto
+      //display: grid
+      //grid-template-columns: max-content auto
       > dt
-        padding-left: 1rem
+        //padding-left: 1rem
+        margin-bottom: 1rem
         &:after
           content: ":"
-      > dt, > dd
+      > dd
         margin-bottom: 0rem
     dl.footnote
       font-size: .9rem
@@ -435,6 +436,9 @@
         font-size: 100% !important
     > dt:first-child
       margin-top: 0
+    dl.method > dt
+      border-left-color: lighten($class-color, 20%)
+      background-color: lighten($class-color, 50%)
     // Since dts get the callout style, we treat this less as callouts.
     tt, code
       font-weight: bold
