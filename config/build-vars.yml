@@ -1,0 +1,4 @@
+# Variables to control the shared azure devops pipeline templates
+variables:
+  mirrorSourceGitRepositoryUri: 'https://diveplane.visualstudio.com/dp/_git/diveplane-readthedocs-theme'
+  mirrorDestinationGitRepositoryUri: 'https://github.com/diveplane/diveplane-readthedocs-theme.git'
