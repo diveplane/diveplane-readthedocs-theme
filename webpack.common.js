@@ -24,11 +24,7 @@ module.exports = {
         test: /\.sass$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: false,
-              reloadAll: true
-            }
+            loader: MiniCssExtractPlugin.loader
           },
           {
             loader: "css-loader"
