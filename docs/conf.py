@@ -60,7 +60,11 @@ html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
     'logo_only': True,
     'navigation_depth': 5,
+    "logo_link": "/ui.html"
 }
+
+html_show_sphinx = False
+
 html_context = {}
 
 if not 'READTHEDOCS' in os.environ:
